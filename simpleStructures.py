@@ -25,54 +25,31 @@ class Stack:
 
 # QUEUE
 class QueueNode:
-    def __init__(self, value, node):
+    def __init__(self, value):
         self.value = value
-        self.node = node
-
-# class Queue:
-#     def __init__(self):
-#         self.front = QueueNode(None, None)
-#         self.back = QueueNode(None, self.front)
-        
-#     def top(self):
-#         return QueueNode(self.front.node.value, self.front.node) #if self.front.node != None else QueueNode(None, )
-
-#     def push(self, value):
-#         newNode = QueueNode(value, self.back)
-#         if self.back.node.node: self.back.node = QueueNode(self.back.node.value, newNode)
-#         else: self.front = QueueNode(self.back.node.value, newNode)
-#         self.back = QueueNode(None, newNode)
-        
-#     def pop(self):
-#         self.front = QueueNode(self.front.node.node.value, self.front.node.node)
-#         return None
+        self.node = None
 
 class Queue:
     def __init__(self):
-        self.back = QueueNode(None, None)
-        self.front = QueueNode(None, self.back)
+        self.front = None
+        self.back = None
         
     def top(self):
-        return QueueNode(self.front.node.value, self.front.node) #if self.front.node != None else QueueNode(None, )
+        return self.front.value #if self.front.node != None else QueueNode(None, )
 
     def push(self, value):
-        newNode = QueueNode(value, self.back.node)
-        # if self.back.node.node: self.back.node = QueueNode(self.back.node.value, newNode)
-        # else: self.front = QueueNode(self.back.node.value, newNode)
-        self.back = QueueNode(None, newNode)
+        newNode = QueueNode(value)
+        if not self.back: self.front = newNode
+        else: self.back.node = newNode
+        self.back = newNode
         
     def pop(self):
-        self.front = QueueNode(self.front.node.node.value, self.front.node.node)
-        return None
+        if self.front != self.back:
+            res = self.front
+            self.front = self.front.node
+            return res
+        res = self.front
+        self.front = None
+        self.back = None
+        return res
 
-a = Queue()
-a.push(1)
-a.push(2)
-# print(a.top().value)
-print(a.front.node.value)
-print(a.back.node.value)
-a.pop()
-a.push(3)
-print(a.front.node.value)
-print(a.back.node.value)
-# print(a.top().value)
