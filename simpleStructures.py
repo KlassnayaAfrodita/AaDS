@@ -53,3 +53,28 @@ class Queue:
         self.back = None
         return res
 
+
+# LINKEDLIST
+class ListNode:
+    def __init__(self, value):
+        self.value = value
+        self.prev = None
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.front = None 
+        self.back = None
+
+    def addNext(self, value, prev):
+        newNode = ListNode(value)
+        if self.front is None:    
+            self.front = newNode
+            self.back.next, self.front.prev = None
+        else:
+            self.prev.next = newNode;      
+            newNode.prev = self.tail;      
+            self.tail = newNode;   
+            self.tail.next = None;   
+
+
